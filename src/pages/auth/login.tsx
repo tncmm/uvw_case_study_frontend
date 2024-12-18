@@ -2,7 +2,6 @@ import { loginUser } from '@/redux/slices/authSlice';
 import { useAppDispatch } from '../../redux/hooks/hooks';
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 
 const LoginPage: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -12,7 +11,7 @@ const LoginPage: React.FC = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null); // State to track login errors
 
-  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleLogin = async (e: any) => {
     e.preventDefault();
     setError(null); // Clear any previous errors
 
@@ -25,12 +24,8 @@ const LoginPage: React.FC = () => {
       } else if (loginUser.rejected.match(result)) {
         setError(result.error.message || 'Login failed. Please try again.');
       }
-    } catch (err: unknown) {
-      if (err instanceof Error) {
-        setError(err.message || 'An unexpected error occurred. Please try again.');
-      } else {
-        setError('An unexpected error occurred. Please try again.');
-      }
+    } catch (err: any) {
+      setError(err.message || 'An unexpected error occurred. Please try again.');
     }
   };
 
@@ -85,9 +80,9 @@ const LoginPage: React.FC = () => {
 
         <p className="mt-6 text-center text-gray-600">
           Don&apos;t have an account?{' '}
-          <Link href="/auth/register" passHref>
-            <a className="text-blue-600 hover:underline font-medium">Register</a>
-          </Link>
+          <a href="/auth/register" className="text-blue-600 hover:underline font-medium">
+            Register
+          </a>
         </p>
       </div>
     </div>
