@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @next/next/no-html-link-for-pages */
 
 import { loginUser } from '@/redux/slices/authSlice';
 import { useAppDispatch } from '../../redux/hooks/hooks';
