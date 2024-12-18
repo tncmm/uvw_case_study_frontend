@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { useAppDispatch } from '../../redux/hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks/hooks';
 import { register } from '../../redux/slices/authSlice';
 import { useRouter } from 'next/router';
 
 const RegisterPage: React.FC = () => {
   const dispatch = useAppDispatch();
+  const { token } = useAppSelector(state => state.auth);
   const router = useRouter();
 
   const [name, setName] = useState('');
@@ -16,23 +17,19 @@ const RegisterPage: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError(null); // Clear previous errors
+    setError(null); 
 
     try {
       const result = await dispatch(register({ name, surname, email, phone, password }));
 
-      // Check if registration was successful
       if (register.fulfilled.match(result)) {
-        router.push('/');
+        router.replace('/auth/login');
+        window.alert("You are registered successfully")
       } else if (register.rejected.match(result)) {
         setError(result.error.message || 'Registration failed. Please try again.');
       }
-    } catch (err: unknown) {
-      if (err instanceof Error) {
-        setError(err.message || 'An unexpected error occurred. Please try again.');
-      } else {
-        setError('An unexpected error occurred. Please try again.');
-      }
+    } catch (err: any) {
+      setError(err.message || 'An unexpected error occurred. Please try again.');
     }
   };
 
@@ -48,7 +45,7 @@ const RegisterPage: React.FC = () => {
             type="text"
             className="w-full border p-2 rounded"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={e => setName(e.target.value)}
             required
           />
         </div>
@@ -60,7 +57,7 @@ const RegisterPage: React.FC = () => {
             type="text"
             className="w-full border p-2 rounded"
             value={surname}
-            onChange={(e) => setSurname(e.target.value)}
+            onChange={e => setSurname(e.target.value)}
             required
           />
         </div>
@@ -72,7 +69,7 @@ const RegisterPage: React.FC = () => {
             type="email"
             className="w-full border p-2 rounded"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={e => setEmail(e.target.value)}
             required
           />
         </div>
@@ -84,7 +81,7 @@ const RegisterPage: React.FC = () => {
             type="text"
             className="w-full border p-2 rounded"
             value={phone}
-            onChange={(e) => setPhone(e.target.value)}
+            onChange={e => setPhone(e.target.value)}
             required
           />
         </div>
@@ -96,7 +93,7 @@ const RegisterPage: React.FC = () => {
             type="password"
             className="w-full border p-2 rounded"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={e => setPassword(e.target.value)}
             required
           />
         </div>
