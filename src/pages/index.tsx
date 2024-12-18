@@ -22,6 +22,8 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null); // Track errors
 
   useEffect(() => {
+    console.log(token);
+    
     (async () => {
       if (!user && token) {
         const userId = parseToken(); // This should return the userId from the token

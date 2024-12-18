@@ -3,7 +3,7 @@
 import { apiFetch } from './api';
 import { getToken } from '@/utils/token';
 
-const token = getToken();
+const token = await getToken();
 
 export async function fetchUserById(id: string) {
     console.log(id);

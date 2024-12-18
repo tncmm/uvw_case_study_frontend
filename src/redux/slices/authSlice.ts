@@ -19,7 +19,7 @@ interface AuthState {
 
 const initialState: AuthState = {
   user: null,
-  token: getToken(),
+  token:await getToken(),
   status: 'idle',
 };
 

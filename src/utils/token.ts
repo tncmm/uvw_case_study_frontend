@@ -6,7 +6,7 @@ export function setToken(token:string) {
     }
   }
   
-  export function getToken() {
+  export async function getToken() {
     if (typeof window !== 'undefined') {
       return localStorage.getItem('token');
     }
