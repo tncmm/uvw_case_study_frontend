@@ -1,8 +1,7 @@
-const BASE_URL = "http://localhost:3001";
 
 export async function apiFetch(url: string, options: RequestInit = {}) {
   
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}${url}`, {
+  const res = await fetch(`${process.env.API_URL}${url}`, {
     ...options,
     headers: {
       'Content-Type': 'application/json',
