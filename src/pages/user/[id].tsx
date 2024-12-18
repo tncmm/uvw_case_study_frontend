@@ -51,7 +51,7 @@ const ProfilePage: React.FC = () => {
         <div className="bg-white rounded-lg shadow-md p-6">
           <h2 className="text-2xl font-bold text-gray-800 mb-4">Your Posts</h2>
           {posts.length === 0 ? (
-            <p className="text-gray-600">You haven't created any posts yet.</p>
+            <p className="text-gray-600">You haven&apos;t created any posts yet.</p>
           ) : (
             <div className="space-y-4">
               {posts.map((post) => (

@@ -2,7 +2,6 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import { useAppDispatch } from '../../redux/hooks/hooks';
 import { createNewPost } from '../../redux/slices/postsSlice';
-import Navbar from '../../components/Navbar';
 import BlogForm from '../../components/BlogForm';
 
 const NewPostPage: React.FC = () => {

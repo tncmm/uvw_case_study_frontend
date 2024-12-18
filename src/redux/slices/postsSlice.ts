@@ -39,12 +39,12 @@ export const getPostsByUserId = createAsyncThunk('posts/getPostsByUserId', async
   return await fetchPostsByUser(userId);
 });
 
-export const createNewPost = createAsyncThunk('posts/createPost', async ({ title, content, tags }: { title: string; content: string; tags?: string[] }, { getState }) => {
+export const createNewPost = createAsyncThunk('posts/createPost', async ({ title, content, tags }: { title: string; content: string; tags?: string[] },) => {
  
   return await createPost({ title, content, tags },);
 });
 
-export const editPost = createAsyncThunk('posts/updatePost', async ({ id, title, content, tags }: { id: string; title?: string; content?: string; tags?: string[] }, { getState }) => {
+export const editPost = createAsyncThunk('posts/updatePost', async ({ id, title, content, tags }: { id: string; title?: string; content?: string; tags?: string[] },) => {
 
   return await updatePost(id, { title, content, tags },);
 });

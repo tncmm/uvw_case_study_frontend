@@ -44,7 +44,7 @@ export const loginUser = createAsyncThunk('auth/login', async (credentials: { em
   return data; 
 });
 
-export const register = createAsyncThunk('auth/register', async (credentials: any) => {
+export const register = createAsyncThunk('auth/register', async (credentials: unknown) => {
   const data = await registerUser(credentials);
   return data;
 });

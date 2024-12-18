@@ -1,8 +1,6 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import { setUserState } from '../slices/authSlice'; // Adjust the import path as needed
-import { RootState } from '../store';
 import { getUserById } from '../slices/userSlice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks/hooks';
 

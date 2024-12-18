@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { apiFetch } from './api';
 
 export async function login({email, password}:{email:string;password:string}) {

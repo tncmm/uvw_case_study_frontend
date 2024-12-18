@@ -8,11 +8,12 @@ import { useRouter } from 'next/router';
 import { parseToken } from '@/utils/token';
 import { getUserById } from '@/redux/slices/userSlice';
 import { setUserState } from '@/redux/slices/authSlice';
+
 export default function Home() {
   const dispatch = useAppDispatch();
-  const user= useAppSelector((state)=>state.auth.user)
-  const token= useAppSelector((state)=>state.auth.token)
-  
+  const user = useAppSelector((state) => state.auth.user);
+  const token = useAppSelector((state) => state.auth.token);
+
   const router = useRouter();
   const posts = useAppSelector((state) => state.posts.items);
   const status = useAppSelector((state) => state.posts.status); // Track loading or error status
@@ -25,29 +26,26 @@ export default function Home() {
       if (!user && token) {
         const userId = parseToken(); // This should return the userId from the token
         try {
-          // Dispatch getUserById and wait for the response
           const fetchedUser = await dispatch(getUserById(userId)).unwrap();
-          
-          // Now update the auth slice with the retrieved user data
+
           dispatch(setUserState({
             user: {
               id: fetchedUser.id,
               email: fetchedUser.email,
               name: fetchedUser.name,
               surname: fetchedUser.surname,
-              phoneNumber: fetchedUser.phoneNumber
+              phoneNumber: fetchedUser.phoneNumber,
             },
-            token: token
+            token: token,
           }));
         } catch (err) {
           console.error('Failed to fetch user data:', err);
-          // Handle error if needed (e.g., redirect to login or logout user)
         }
       } else if (!user && !token) {
         router.replace("/auth/login");
         return;
       }
-  
+
       const fetchPosts = async () => {
         setError(null); 
         try {
@@ -55,14 +53,18 @@ export default function Home() {
           if (getPosts.rejected.match(result)) {
             setError(result.error.message || 'Failed to fetch posts. Please try again.');
           }
-        } catch (err: any) {
-          setError(err.message || 'An unexpected error occurred. Please try again.');
+        } catch (err: unknown) {
+          if (err instanceof Error) {
+            setError(err.message || 'An unexpected error occurred. Please try again.');
+          } else {
+            setError('An unexpected error occurred. Please try again.');
+          }
         }
       };
-  
+
       fetchPosts();
     })();
-  }, [filters, sort, dispatch]);
+  }, [filters, sort, dispatch, router, token, user]);
 
   const handleSearch = (searchTerm: string) => {
     setFilters((prev) => ({ ...prev, search: searchTerm }));

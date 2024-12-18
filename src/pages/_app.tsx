@@ -4,7 +4,6 @@ import { store } from '../redux/store';
 import '../styles/globals.css';
 import Navbar from '@/components/Navbar';
 import { useRouter } from 'next/router';
-import { useAuthCheck } from '@/redux/hooks/authCheck';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();

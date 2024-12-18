@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { getToken } from '@/utils/token';
 import { apiFetch } from './api';
-var token = getToken();
+const token = getToken();
 
 export async function fetchPosts(params?:any) {
   const query = params ? '?' + new URLSearchParams(params).toString() : '';
