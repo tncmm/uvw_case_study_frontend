@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { loginUser } from '@/redux/slices/authSlice';
 import { useAppDispatch } from '../../redux/hooks/hooks';
 import React, { useState } from 'react';
