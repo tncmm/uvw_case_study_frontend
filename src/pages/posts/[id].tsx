@@ -3,13 +3,14 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks/hooks';
 import { getPostById, removePost } from '../../redux/slices/postsSlice';
 import Link from 'next/link';
+import { parseToken } from '@/utils/token';
 
 export default function PostDetail() {
   const router = useRouter();
   const { id } = router.query;
   const dispatch = useAppDispatch();
   const {currentPost} = useAppSelector(state => state.posts);
-  const {user} = useAppSelector(state => state.auth);
+
 
   useEffect(() => {
     if (id && typeof id === 'string') {
@@ -28,8 +29,8 @@ export default function PostDetail() {
   };
 
   if(!currentPost) return <div>Loading...</div>;
-
-  const isAuthor = user?.id == currentPost.authorId;
+  const userId= parseToken()??""
+  const isAuthor = userId== currentPost.authorId;
 
   return (
     <div className="min-h-screen bg-gray-50 py-10">

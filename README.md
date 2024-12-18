@@ -1,36 +1,119 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+### **Tech Stack**
+- **Framework**: Next.js (React-based)
+- **State Management**: Redux Toolkit
+- **Styling**: Tailwind CSS
+- **API Communication**: Fetch API
 
-## Getting Started
+---
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### **Project Structure**
+```
+src/
+├── components/          # Reusable UI components (e.g., BlogCard, Navbar)
+├── redux/            # Redux slices for managing state (e.g., auth, posts)
+├── pages/               # Next.js pages for routing
+│   ├── api/             # API route handlers (if any server-side functions)
+│   ├── index.tsx        # Homepage
+│   ├── user/            # User profile
+│   ├── posts/           # Post-related pages (e.g., create, detail)
+├── styles/              # Global styles (e.g., Tailwind CSS)
+├── utils/               # Helper functions (e.g., tokens)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### **Key Features**
+1. **Home Page**
+   - Displays a grid of blog posts using the `BlogCard` component.
+   - Allows users to filter posts by tags and search titles.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. **Authentication**
+   - Login and registration pages.
+   - JWT-based auto-login using tokens stored in `localStorage`.
 
-## Learn More
+3. **Profile Page**
+   - Displays user details and their posts.
+   - Uses dynamic routing to fetch user-specific data.
 
-To learn more about Next.js, take a look at the following resources:
+4. **Post Management**
+   - Create, update, delete posts.
+   - Display post details using a dynamic route (`/posts/[id]`).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+5. **Global State**
+   - Managed by Redux Toolkit.
+   - State slices:
+     - **Auth**: Handles user authentication and session management.
+     - **Posts**: Manages the list of posts and post details.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+### **Setup Instructions**
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+2. Set up environment variables:
+   Create a `.env` file with:
+   ```
+  API_URL=http://localhost:3001/
+   ```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+4. Navigate to:
+   - `http://localhost:3000` for the application.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### **Logic Overview**
+1. **API Integration**
+   - The `/api.ts` file provides helper functions for API requests.
+   - Example:
+     ```typescript
+     export const fetchPosts = async () => {
+       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts`);
+       return res.json();
+     };
+     ```
+
+2. **State Management**
+   - `authSlice`: Manages user authentication state and token storage.
+   - `postsSlice`: Handles fetching, creating, and updating posts.
+   - `userSlice`: Manages user.
+
+3. **Page Navigation**
+   - Login redirects to the homepage on success.
+   - Clicking "Read More" on a post navigates to `/posts/[id]`.
+
+---
+
+### **Styling Overview**
+- Tailwind CSS is used for responsive and modern UI design.
+- Global styles are defined in `styles/globals.css`:
+   ```css
+   @tailwind base;
+   @tailwind components;
+   @tailwind utilities;
+   ```
+
+---
+
+### **Key Pages**
+1. **`/` - Homepage**
+   - Displays blog posts in a responsive grid.
+   - Uses `BlogCard` for each post.
+
+2. **`/auth/login` and `/auth/register`**
+   - Login and registration pages for user authentication.
+
+3. **`/posts/create`**
+   - A form for creating new blog posts.
+
+4. **`/posts/[id]`**
+   - A dynamic route for displaying post details.
+
+---
+
+This **README.md** file provides a comprehensive guide for setting up and understanding the project. Let me know if you'd like additional details or adjustments! 🚀
+
