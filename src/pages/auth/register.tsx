@@ -1,11 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @next/next/no-html-link-for-pages */
 import React, { useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks/hooks';
+import { useAppDispatch } from '../../redux/hooks/hooks';
 import { register } from '../../redux/slices/authSlice';
 import { useRouter } from 'next/router';
 
 const RegisterPage: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { token } = useAppSelector(state => state.auth);
   const router = useRouter();
 
   const [name, setName] = useState('');

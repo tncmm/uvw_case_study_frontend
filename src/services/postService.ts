@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { getToken } from '@/utils/token';
 import { apiFetch } from './api';
 
