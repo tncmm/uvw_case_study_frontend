@@ -18,7 +18,7 @@ export const store = configureStore({
 
 const rootReducer = (state: any, action: any) => {
   if (action.type === 'RESET') {
-    state = undefined; // Resets the state
+    state = undefined;
   }
   return configureStore(state);
 };

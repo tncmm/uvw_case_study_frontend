@@ -22,7 +22,6 @@ const BlogForm: React.FC<BlogFormProps> = ({ initialValues, onSubmit }) => {
   const validateFields = () => {
     let isValid = true;
     
-    // Title validation: length > 19 and < 51
     if (title.length < 20 || title.length > 50) {
       setTitleError('Title must be between 20 and 50 characters.');
       isValid = false;
@@ -30,7 +29,6 @@ const BlogForm: React.FC<BlogFormProps> = ({ initialValues, onSubmit }) => {
       setTitleError(null);
     }
 
-    // Content validation: length > 19 and < 101
     if (content.length < 20 || content.length > 100) {
       setContentError('Content must be between 20 and 100 characters.');
       isValid = false;

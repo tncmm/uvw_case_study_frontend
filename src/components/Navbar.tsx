@@ -15,9 +15,11 @@ const Navbar: React.FC = () => {
       clearToken();
       localStorage.clear();
       console.log("User logged out");
-      router.push("/auth/login");
+      router.replace('/')
+      router.reload();
     } else {
-      router.push("/auth/login");
+      router.replace('/auth/login')
+
     }
   };
 

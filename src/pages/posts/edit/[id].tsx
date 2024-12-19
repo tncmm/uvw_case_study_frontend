@@ -14,16 +14,13 @@ export default function EditPostPage() {
 
   useEffect(() => {
     if (id && typeof id === 'string') {
-      // Fetch the post data so we have something to populate the form with
       dispatch(getPostById(id)).finally(() => setLoading(false));
     }
   }, [id, dispatch]);
 
   const handleSubmit = async (values: { title: string; content: string; tags: string[] }) => {
     if (id && typeof id === 'string') {
-      // Dispatch updatePost action with the updated data
       await dispatch(editPost({ id, ...values }));
-      // After updating, you can redirect the user back to the main page or post detail
       router.push('/');
     }
   };

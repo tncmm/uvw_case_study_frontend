@@ -30,7 +30,7 @@ interface TokenPayload {
 }
 
 export function parseToken(){
-  const token = localStorage.getItem('token'); // or however you stored it
+  const token = localStorage.getItem('token');  
 if (token) {
   const payload = jwtDecode<TokenPayload>(token);
   console.log(payload.userId, payload.role);

@@ -1,4 +1,4 @@
-const BASE_URL="http://localhost:3001"
+const BASE_URL="https://uvw-case-study-backend.onrender.com"
 export async function apiFetch(url: string, options: RequestInit = {}) {
   
   const res = await fetch(`${BASE_URL}${url}`, {
@@ -20,5 +20,5 @@ export async function apiFetch(url: string, options: RequestInit = {}) {
   }
   console.log(json);
   
-  return json.data; // return the data property from the response
+  return json.data; 
 }

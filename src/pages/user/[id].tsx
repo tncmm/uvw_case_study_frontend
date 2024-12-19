@@ -4,11 +4,11 @@ import { getUserById } from '../../redux/slices/userSlice';
 import { getPostsByUserId } from '../../redux/slices/postsSlice';
 import BlogCard from '../../components/BlogCard';
 import { useRouter } from 'next/router';
-import { withAuth } from '@/redux/hooks/authCheck';
+
 
 const ProfilePage: React.FC = () => {
   const router = useRouter();
-  const { id } = router.query; // Assuming user ID comes from the route
+  const { id } = router.query;
   const dispatch = useAppDispatch();
 
   const user = useAppSelector((state) => state.user.currentUser);

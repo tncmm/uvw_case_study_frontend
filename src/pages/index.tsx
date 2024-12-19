@@ -16,17 +16,17 @@ export default function Home() {
 
   const router = useRouter();
   const posts = useAppSelector((state) => state.posts.items);
-  const status = useAppSelector((state) => state.posts.status); // Track loading or error status
+  const status = useAppSelector((state) => state.posts.status); 
   const [filters, setFilters] = useState({ search: '' });
   const [sort, setSort] = useState<'asc' | 'desc'>('desc');
-  const [error, setError] = useState<string | null>(null); // Track errors
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     console.log(token);
     
     (async () => {
       if (!user) {
-        const userId = parseToken(); // This should return the userId from the token
+        const userId = parseToken();  
         try {
           const fetchedUser = await dispatch(getUserById(userId)).unwrap();
 

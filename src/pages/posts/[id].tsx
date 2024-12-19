@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks/hooks';
 import { getPostById, removePost } from '../../redux/slices/postsSlice';
 import Link from 'next/link';
-import { parseToken } from '@/utils/token';
 
 export default function PostDetail() {
   const router = useRouter();

@@ -12,16 +12,15 @@ const LoginPage: React.FC = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState<string | null>(null); // State to track login errors
+  const [error, setError] = useState<string | null>(null);
 
   const handleLogin = async (e: any) => {
     e.preventDefault();
-    setError(null); // Clear any previous errors
+    setError(null); 
 
     try {
       const result = await dispatch(loginUser({ email, password }));
 
-      // Check if the login was successful
       if (loginUser.fulfilled.match(result)) {
         router.push('/');
       } else if (loginUser.rejected.match(result)) {

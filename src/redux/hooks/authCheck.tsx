@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { setUserState } from '../slices/authSlice'; // Adjust the import path as needed
+import { setUserState } from '../slices/authSlice'; 
 import { getUserById } from '../slices/userSlice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks/hooks';
 
@@ -16,13 +16,10 @@ export const useAuthCheck = () => {
 
       if (!user && storedToken) {
         try {
-          // Assuming you have a function to parse the token and get userId
           const userId = parseToken(); 
           
-          // Dispatch action to fetch user by ID
           const fetchedUser = await dispatch(getUserById(userId??"")).unwrap();
           
-          // Update auth state
           dispatch(setUserState({
             user: {
               id: fetchedUser.id,
@@ -38,11 +35,9 @@ export const useAuthCheck = () => {
     
         }
       } else if (!storedToken) {
-       // router.replace("/auth/login");
       }
     };
 
-    // Run auth check on initial load and when route changes
     checkAuth();
   }, [dispatch, router, user]);
 
@@ -58,9 +53,8 @@ export const withAuth = <P extends object>(WrappedComponent: ComponentType<P>) =
   const WithAuthComponent = (props: P) => {
     const { user } = useAuthCheck();
 
-    // If no user is authenticated, the useAuthCheck hook will handle redirection
     if (!user) {
-      return null; // Render nothing while redirecting
+      return null;
     }
 
     return <WrappedComponent {...props} />;
