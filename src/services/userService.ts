@@ -9,9 +9,7 @@ export async function fetchUserById(id: string) {
     console.log(id);
     
   return await apiFetch(`/user/${id}`, {
-    headers: {
-      "x-auth-token": token ?? "",
-    },
+    
   });
 }
 

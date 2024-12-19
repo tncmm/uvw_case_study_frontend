@@ -11,7 +11,7 @@ const ProfilePage: React.FC = () => {
   const { id } = router.query; // Assuming user ID comes from the route
   const dispatch = useAppDispatch();
 
-  const user = useAppSelector((state) => state.auth.user);
+  const user = useAppSelector((state) => state.user.currentUser);
   const posts = useAppSelector((state) => state.posts.items);
   const userStatus = useAppSelector((state) => state.auth.status);
 
@@ -73,4 +73,4 @@ const ProfilePage: React.FC = () => {
   );
 };
 
-export default withAuth(ProfilePage);
+export default (ProfilePage);

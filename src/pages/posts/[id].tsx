@@ -9,9 +9,9 @@ export default function PostDetail() {
   const router = useRouter();
   const { id } = router.query;
   const dispatch = useAppDispatch();
-  const {currentPost} = useAppSelector(state => state.posts);
-
-
+  const { currentPost } = useAppSelector((state) => state.posts);
+    const user = useAppSelector((state) => state.user.currentUser);
+  
   useEffect(() => {
     if (id && typeof id === 'string') {
       dispatch(getPostById(id));
@@ -28,9 +28,9 @@ export default function PostDetail() {
     }
   };
 
-  if(!currentPost) return <div>Loading...</div>;
-  const userId= parseToken()??""
-  const isAuthor = userId== currentPost.authorId;
+  if (!currentPost) return <div>Loading...</div>;
+
+ 
 
   return (
     <div className="min-h-screen bg-gray-50 py-10">
@@ -55,7 +55,8 @@ export default function PostDetail() {
           ))}
         </div>
 
-        {isAuthor && (
+        {/* Edit and Delete Buttons */}
+        {user  && (
           <div className="flex space-x-4 mt-4">
             <Link href={`/posts/edit/${currentPost.id}`} passHref>
               <button className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded">

@@ -7,17 +7,13 @@ import { apiFetch } from './api';
 export async function fetchPosts(params?:any) {
   const query = params ? '?' + new URLSearchParams(params).toString() : '';
   return await apiFetch(`/post${query}`,{
-    headers: {
-      "x-auth-token": await  getToken()??""
-    },
+   
   });
 }
 
 export async function fetchPostById(id:string) {
   return await apiFetch(`/post/${id}`,{
-    headers: {
-      "x-auth-token": await  getToken()??""
-    },
+    
   });
 }
 

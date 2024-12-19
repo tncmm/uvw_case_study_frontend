@@ -25,7 +25,7 @@ export default function Home() {
     console.log(token);
     
     (async () => {
-      if (!user && token) {
+      if (!user) {
         const userId = parseToken(); // This should return the userId from the token
         try {
           const fetchedUser = await dispatch(getUserById(userId)).unwrap();
@@ -43,10 +43,7 @@ export default function Home() {
         } catch (err) {
           console.error('Failed to fetch user data:', err);
         }
-      } else if (!user && !token) {
-        router.replace("/auth/login");
-        return;
-      }
+      } 
 
       const fetchPosts = async () => {
         setError(null); 

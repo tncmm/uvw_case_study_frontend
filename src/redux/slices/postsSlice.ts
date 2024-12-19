@@ -65,7 +65,7 @@ const postsSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(getPosts.fulfilled, (state, action) => {
-        state.items = action.payload; // data array from API
+        state.items = action.payload;
         state.status = 'idle';
       })
       .addCase(getPostById.fulfilled, (state, action) => {

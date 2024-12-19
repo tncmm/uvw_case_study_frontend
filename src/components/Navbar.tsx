@@ -1,9 +1,8 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { clearToken } from "@/utils/token";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/redux/hooks/hooks";
-
 
 const Navbar: React.FC = () => {
   const router = useRouter();
@@ -11,14 +10,15 @@ const Navbar: React.FC = () => {
   const { user } = useAppSelector((state) => state.auth);
 
   const handleLogout = () => {
-    dispatch({ type: 'RESET' });
-    clearToken()
-    // Clear any stored session (localStorage, redux state, etc.)
-    localStorage.clear();
-    console.log("User logged out");
-
-    // Redirect to login page
-    router.push("/auth/login");
+    if (user) {
+      dispatch({ type: "RESET" });
+      clearToken();
+      localStorage.clear();
+      console.log("User logged out");
+      router.push("/auth/login");
+    } else {
+      router.push("/auth/login");
+    }
   };
 
   return (
@@ -36,28 +36,34 @@ const Navbar: React.FC = () => {
           </div>
 
           {/* Center Links */}
-          <div className="flex space-x-4">
-            <button
-              onClick={() => router.push("/posts/create")}
-              className="text-gray-700 hover:text-blue-600 font-medium"
-            >
-              Create Post
-            </button>
-            <button
-              onClick={() => router.push(`/user/${user?.id}`)}
-              className="text-gray-700 hover:text-blue-600 font-medium"
-            >
-              Profile
-            </button>
-          </div>
+          {user && (
+            <div className="flex space-x-4">
+              <button
+                onClick={() => router.push("/posts/create")}
+                className="text-gray-700 hover:text-blue-600 font-medium"
+              >
+                Create Post
+              </button>
+              <button
+                onClick={() => router.push(`/user/${user.id}`)}
+                className="text-gray-700 hover:text-blue-600 font-medium"
+              >
+                Profile
+              </button>
+            </div>
+          )}
 
-          {/* Right Section - Logout */}
+          {/* Right Section - Login/Logout */}
           <div>
             <button
               onClick={handleLogout}
-              className="text-white bg-red-500 hover:bg-red-600 px-4 py-2 rounded-md text-sm font-medium"
+              className={`text-white px-4 py-2 rounded-md text-sm font-medium ${
+                user
+                  ? "bg-red-500 hover:bg-red-600"
+                  : "bg-blue-500 hover:bg-blue-600"
+              }`}
             >
-              Logout
+              {user ? "Logout" : "Login"}
             </button>
           </div>
         </div>
